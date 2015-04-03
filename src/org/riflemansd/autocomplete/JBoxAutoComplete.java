@@ -101,4 +101,14 @@ public class JBoxAutoComplete extends JComboBox implements KeyListener {
             ctrl = false;
         }
     }
+
+    public String[] getWords() {
+        return words;
+    }
+
+    public void setWords(String[] words) {
+        this.words = words;
+    }
+    
+    
 }
