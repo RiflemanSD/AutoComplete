@@ -12,13 +12,84 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 /**
  *
  * @author RiflemanSD
  */
 public class JBoxAutoComplete extends JComboBox implements KeyListener {
-    private boolean ctrl;
+    private int caretPos;
+    private String[] words;
+
+    public JBoxAutoComplete(String[] words) {
+        this.words = words;
+        
+        this.getEditor().getEditorComponent().addKeyListener(this);
+        //this.setFont(new Font("Serif", Font.BOLD, 20));
+        
+        this.setEditable(true);
+        this.setMaximumRowCount(4);
+    }
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+        JTextField textField = (JTextField)editor.getEditorComponent();
+        caretPos = textField.getCaretPosition();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int k = e.getKeyCode();
+        //enter
+        if (k == 10) {
+            String sel = (String) this.getSelectedItem();
+            this.getEditor().setItem(sel);
+        }
+        //System.out.println("t " + (String)this.getEditor().getItem());
+        //typed = false;
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        int k = e.getKeyCode();
+        if (!(k == 8) && !Character.isDigit(e.getKeyChar()) && !Character.isLetter(e.getKeyChar())) return;
+        String w;
+        w = "";
+
+        w = (String)this.getEditor().getItem();
+        this.removeAllItems();
+
+        String nt = "";
+        if (w.length() == 0) { //|| Character.isSpaceChar(w.charAt(0))
+            return;
+        }
+
+        for (String word : words) {
+            if (word.contains(w)) {
+                nt += word + "\n";
+                this.addItem(word);
+            }
+        }
+        
+        this.getEditor().setItem(w);
+        JTextField textField = (JTextField)editor.getEditorComponent();
+        if (k == 8) textField.setCaretPosition(caretPos);
+        else textField.setCaretPosition(caretPos+1);
+        
+        this.setPopupVisible(false);
+        if (! (nt.length() == 0)) this.setPopupVisible(true);
+    }
+
+    public String[] getWords() {
+        return words;
+    }
+
+    public void setWords(String[] words) {
+        this.words = words;
+    }
+    
+    /*private boolean ctrl;
     private boolean ctrla;
     private boolean backspace;
     private String[] words;
@@ -110,5 +181,5 @@ public class JBoxAutoComplete extends JComboBox implements KeyListener {
         this.words = words;
     }
     
-    
+    */
 }
