@@ -22,7 +22,7 @@ public class JBoxAutoComplete extends JComboBox implements KeyListener {
     private int caretPos;
     private String[] words;
 
-    public JBoxAutoComplete(String[] words) {
+    public JBoxAutoComplete(String... words) {
         this.words = words;
         
         this.getEditor().getEditorComponent().addKeyListener(this);
