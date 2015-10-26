@@ -20,7 +20,8 @@ import javax.swing.JPanel;
  * @author RiflemanSD
  */
 public class Test extends JFrame {
-    private String[] words = {"about", "abc", "Hello", "World", "war", "word", "lakis", "luck", "lakis2", "between", "wow", "warrior", "world", "wombocombo"};
+    private String[] words = {"abds", "ABOUT", "About", "about", "abc", "Hello", "World", "war", "word", "lakis", "luck", "lakis2", "between", "wow", "warrior", "world", "wombocombo"};
+    private String[] greekWords = {"Σωτήρης", "Κώστας", "Δημήτρης", "Γιώργος", "Γιάννης", "Σάββας", "Κωνσταντίνος", "Χαράλαμπος", "Μάρκος", "Μαρία", "Σωτηρία", "Δήμητρα", "ΣΩΤΗΡΗΣ"};
     
     public Test() {
         this.setSize(250, 300);
@@ -29,7 +30,10 @@ public class Test extends JFrame {
         JPanel p = new JPanel();
         p.setLayout(null);
         
-        JBoxAutoComplete box = new JBoxAutoComplete(words);
+        JBoxAutoCompletePrompt box = new JBoxAutoCompletePrompt(words);
+        AutoCompleteListener l = new AutoCompleteListener();
+        box.addAutoCompleteListener(l);
+        
         box.setBounds(50, 50, 120, 20);
         p.add(box);
         JComboBox box1 = new JComboBox();

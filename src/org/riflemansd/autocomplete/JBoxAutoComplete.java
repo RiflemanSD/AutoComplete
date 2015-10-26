@@ -9,8 +9,10 @@ package org.riflemansd.autocomplete;
 
 
 import java.awt.Font;
+import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -19,6 +21,7 @@ import javax.swing.JTextField;
  * @author RiflemanSD
  */
 public class JBoxAutoComplete extends JComboBox implements KeyListener {
+
     private int caretPos;
     private String[] words;
 
