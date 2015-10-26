@@ -108,8 +108,10 @@ public class JBoxAutoCompletePrompt extends CustomComboBox implements KeyListene
             String[] sel = (String[]) this.getSelectedItem();
             this.getEditor().setItem(sel);
             
-            for (AutoCompleteEvent hl : listeners)
-                hl.onAutoComplete(sel[0]);
+            for (AutoCompleteEvent hl : listeners) {
+                hl.updateWord(sel[0]);
+                hl.onAutoComplete();
+            }
         }
         //System.out.println("t " + (String)this.getEditor().getItem());
         //typed = false;
@@ -132,6 +134,10 @@ public class JBoxAutoCompletePrompt extends CustomComboBox implements KeyListene
         String nt = "";
         //There is at least a character at editor
         if (w.length() == 0) { //|| Character.isSpaceChar(w.charAt(0))
+            for (AutoCompleteEvent hl : listeners) {
+                hl.updateWord("");
+                hl.onAutoComplete();
+            }
             return;
         }
         TimeCalc t = new TimeCalc();
@@ -173,8 +179,10 @@ public class JBoxAutoCompletePrompt extends CustomComboBox implements KeyListene
         this.setPopupVisible(false);
         if (! (nt.length() == 0)) this.setPopupVisible(true);
         
-        for (AutoCompleteEvent hl : listeners)
-            hl.onAutoComplete(w);
+        for (AutoCompleteEvent hl : listeners) {
+            hl.updateWord(w);
+            hl.onAutoComplete();
+        }
     }
 
     public String[] getWords() {

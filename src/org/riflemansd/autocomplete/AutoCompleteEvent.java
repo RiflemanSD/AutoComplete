@@ -10,5 +10,6 @@ package org.riflemansd.autocomplete;
  * @author sotir
  */
 interface AutoCompleteEvent {
-    void onAutoComplete(String word);
+    void updateWord(String word);
+    void onAutoComplete();
 }

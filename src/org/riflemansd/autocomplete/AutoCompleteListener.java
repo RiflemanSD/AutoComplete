@@ -13,9 +13,17 @@ public class AutoCompleteListener implements AutoCompleteEvent {
     private String word;
     
     @Override
-    public void onAutoComplete(String word) {
+    public void updateWord(String word) {
         this.word = word;
-        
+    }
+
+    @Override
+    public void onAutoComplete() {
         System.out.println(word);
     }
+
+    public String getWord() {
+        return word;
+    }
+    
 }
