@@ -7,8 +7,6 @@ package org.riflemansd.autocomplete;
  * Github: RiflemanSD - https://github.com/RiflemanSD
  */
 
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.FocusEvent;
