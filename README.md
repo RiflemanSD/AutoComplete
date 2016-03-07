@@ -1,4 +1,4 @@
-# AutoComplete v1.0
+# AutoComplete v1.1
 
 #### You can use JComboBoxAutocomplete to create nice swings autocomplete projects.
 
