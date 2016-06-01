@@ -32,6 +32,7 @@ public class JBoxAutoCompletePromptFasterWM extends CustomComboBox implements Ke
     private String promptText;
     private HashMap<Character, Character> greekToneChars;
     boolean isPrompt;
+    private int wordLengthToCheck;
 
     public JBoxAutoCompletePromptFasterWM(String... words) {
         init(null, 4, words);
@@ -45,6 +46,18 @@ public class JBoxAutoCompletePromptFasterWM extends CustomComboBox implements Ke
         init(font, maxRowCount, words);
         initPromptText(prompt);
     }
+    public JBoxAutoCompletePromptFasterWM(int wordLengthToCheck, String... words) {
+        init(null, 4, words);
+        initPromptText("");
+        
+        this.wordLengthToCheck = wordLengthToCheck;
+    }
+    public JBoxAutoCompletePromptFasterWM(String prompt, Font font, int maxRowCount, int wordLengthToCheck, String... words) {
+        init(font, maxRowCount, words);
+        initPromptText(prompt);
+        
+        this.wordLengthToCheck = wordLengthToCheck;
+    }
     
     private void init(Font font, int maxRowCount, String... words) {
         this.listeners = new ArrayList<AutoCompleteEvent>();
@@ -56,6 +69,7 @@ public class JBoxAutoCompletePromptFasterWM extends CustomComboBox implements Ke
         
         this.setEditable(true);
         this.setMaximumRowCount(maxRowCount);
+        wordLengthToCheck = -1;
     }
     
     private void initGreekToneHashMap() {
@@ -166,6 +180,8 @@ public class JBoxAutoCompletePromptFasterWM extends CustomComboBox implements Ke
         
         //Remove all items from ComboBox
         w = (String)this.getEditor().getItem();
+        if (w.length() <= wordLengthToCheck) return;
+        
         this.removeAllItems();
 
         String nt = "";
